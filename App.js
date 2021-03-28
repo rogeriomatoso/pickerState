@@ -1,12 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View,} from 'react-native';
+import Head from './src/components/Head';
+import {Picker} from '@react-native-picker/picker';
 
 export default class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      nome: '',      
+      nome: '',
+      curso: 0,
+      periodo: 0,
+      turno: 0,      
+      cursos:[
+
+      ],
+      periodos:[
+
+      ],
+      turnos:[
+
+      ],
     }
     this.nomeUsuario = this.nomeUsuario.bind(this);
   }
@@ -17,26 +31,30 @@ export default class App extends Component{
   render(){
     return (
       <View style={styles.container}>
-        <View>
-          <Head/>
-        </View>
-        <View>
-          <Text style={styles.textInput}> Selecione os parâmetros:</Text>
-          <TextInput 
-            style={styles.input}
-            placeholder = 'Digite seu nome:'
-            onChangeText = {this.nomeUsuario}
-          />
-          <Text style={{fontSize: 25, marginBottom:20, paddingLeft: 5,}}>Informações Inseridas:</Text>
-          <View style={{flexDirection: 'row'}}>
-            <View>
-            <Text style={styles.texto}>Nome: </Text>
-            </View>
-            <View style={{marginLeft: 25}}>
-            <Text style={styles.textoFinal}>{this.state.nome}</Text>
-            </View>
+          <View>
+            <Head/>         
           </View>
-          <StatusBar style="auto" />
+          <View>
+            <Text style={styles.textInput}> Selecione os parâmetros:</Text>
+            <TextInput 
+              style={styles.input}
+              placeholder = 'Digite seu nome:'
+              onChangeText = {this.nomeUsuario}
+            />
+            <View>
+              <Picker>
+                
+              </Picker>
+            </View>
+            <Text style={{fontSize: 25, marginBottom:20, paddingLeft: 5,}}>Informações Inseridas:</Text>
+            <View style={{flexDirection: 'row'}}>
+              <View>
+              <Text style={styles.texto}>Nome: </Text>
+              </View>
+              <View style={{marginLeft: 25}}>
+              <Text style={styles.textoFinal}>{this.state.nome}</Text>
+              </View>
+            </View>         
        </View>
       </View>
     )
