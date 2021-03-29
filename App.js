@@ -96,28 +96,20 @@ export default class App extends Component{
             </Picker>
           </View>
         </View>
-         <Text style={{fontSize: 25, marginBottom:20, paddingLeft: 5,}}>Informações Inseridas:</Text>
-        <View style={{ flexDirection: 'row' }}>
+         <Text style={{fontSize: 25, marginBottom: 20, paddingLeft: 5}}>Informações Inseridas:</Text>
+        <View style={{ flexDirection: 'row' , alignItems:'flex-start'}}>
           <View>
             <Text style={styles.texto}>Nome: </Text>
             <Text style={styles.texto}>Curso: </Text>
-            <Text style={styles.texto}>Período: </Text> 
+            <Text style={styles.texto}>Período: <Text style={styles.textoFinal}>{this.state.periodos[this.state.periodo].semestre}</Text></Text>                      
           </View>
-          <View style={{ marginLeft: 25 }}>
+          <View>
             <Text style={styles.textoFinal}>{this.state.nome}</Text>
-            <Text style={styles.textoFinal}>{this.state.cursos[this.state.curso].nome}</Text>  
-            <Text style={styles.textoFinal}>{this.state.periodos[this.state.periodo].semestre}</Text>            
+            <Text style={styles.textoFinal}>{this.state.cursos[this.state.curso].nome}</Text>             
+            <Text style={styles.texto}>Turno: <Text style={styles.textoFinal}>{this.state.turnos[this.state.turno].horario}</Text></Text>           
           </View>
-       </View>  
-          
-          <View style={{ marginLeft: 25 }}>
-                      
-          </View>
-          <View style={{ marginLeft: 25 }}>
-                        
-          </View>
-               
-      </View>
+       </View>                        
+     </View>
     )
   }
 }
@@ -125,9 +117,7 @@ export default class App extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
+    backgroundColor: '#fff',   
     padding: 10,    
   },
   input:{
@@ -142,14 +132,12 @@ const styles = StyleSheet.create({
   },
 
   textInput:{
-    fontSize: 20,
-    //textAlign:'center',       
+    fontSize: 20,         
   },
 
   texto:{
     fontSize: 18,
-    fontFamily: 'arial',
-    fontWeight: 'bold',
+    fontFamily: 'arial',    
     marginBottom: 10,
     padding: 10
   },
@@ -158,9 +146,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'arial',
     fontStyle: 'italic',  
-    padding: 13,  
-    //marginLeft:25
+    padding: 10, 
+    marginBottom: 10,  
   },
+
   combo:{
     width: 300,
     height: 40,
