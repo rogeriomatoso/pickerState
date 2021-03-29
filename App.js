@@ -13,49 +13,110 @@ export default class App extends Component{
       periodo: 0,
       turno: 0,      
       cursos:[
-
+        {key:1, nome:'Curso'},
+        {key:2, nome:'Direito'},
+        {key:3, nome:'Administração'},
+        {key:4, nome:'Veterinária'},
+        {key:5, nome:'Zoologia'},
+        {key:6, nome:'Medicina'},
       ],
       periodos:[
-
+        {key:1, semestre: 'Período'},
+        {key:2, semestre: '1º'},
+        {key:3, semestre: '2º'},
+        {key:4, semestre: '3º'},
+        {key:5, semestre: '4º'},
+        {key:6, semestre: '5º'},
+        {key:7, semestre: '6º'},
       ],
       turnos:[
+        {key:1, horario:'Turno'},
+        {key:2, horario:'Manhã'},
+        {key:3, horario:'Tarde'},
+        {key:4, horario:'Noite'},
 
       ],
     }
     this.nomeUsuario = this.nomeUsuario.bind(this);
+    
   }
   nomeUsuario(texto){
-    this.setState({nome: texto});
+    if(texto.lenght < 0){
+      alert('Nome?');
+    }
+    else{
+      this.setState({nome: texto});
+    }
   }
 
   render(){
+    let cursosItem = this.state.cursos.map((v,k)=>{
+      return<Picker.Item key={k} value={k} label={v.nome}/>})
+
+    let periodosItem = this.state.periodos.map((v,k)=>{
+      return<Picker.Item key={k} value={k} label={v.semestre}/>})
+       
+    let turnosItem = this.state.turnos.map((v,k)=>{
+      return<Picker.Item key={k} value={k} label={v.horario}/>})
+
     return (
       <View style={styles.container}>
+        <View>
+          <Head />
+        </View>
+        <View>
+          <Text style={styles.textInput}> Selecione os parâmetros:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder='Digite seu nome:'
+            onChangeText={this.nomeUsuario}
+          />
           <View>
-            <Head/>         
+            <Picker
+              style={styles.combo}            
+              selectValue={this.state.curso}
+              onValueChange={(itemValue, itemIndex) => this.setState({curso: itemValue})}>
+              {cursosItem}
+            </Picker>
           </View>
           <View>
-            <Text style={styles.textInput}> Selecione os parâmetros:</Text>
-            <TextInput 
-              style={styles.input}
-              placeholder = 'Digite seu nome:'
-              onChangeText = {this.nomeUsuario}
-            />
-            <View>
-              <Picker>
-                
-              </Picker>
-            </View>
-            <Text style={{fontSize: 25, marginBottom:20, paddingLeft: 5,}}>Informações Inseridas:</Text>
-            <View style={{flexDirection: 'row'}}>
-              <View>
-              <Text style={styles.texto}>Nome: </Text>
-              </View>
-              <View style={{marginLeft: 25}}>
-              <Text style={styles.textoFinal}>{this.state.nome}</Text>
-              </View>
-            </View>         
-       </View>
+            <Picker
+            style={styles.combo}
+              selectValue={this.state.periodo}
+              onValueChange={(itemValue, itemIndex) => this.setState({periodo: itemValue})}>
+              {periodosItem}
+            </Picker>
+          </View>
+          <View>
+            <Picker
+            style={styles.combo}
+              selectValue={this.state.turno}
+              onValueChange={(itemValue, itemIndex) => this.setState({turno: itemValue})}>
+              {turnosItem}
+            </Picker>
+          </View>
+        </View>
+         <Text style={{fontSize: 25, marginBottom:20, paddingLeft: 5,}}>Informações Inseridas:</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <View>
+            <Text style={styles.texto}>Nome: </Text>
+            <Text style={styles.texto}>Curso: </Text>
+            <Text style={styles.texto}>Período: </Text> 
+          </View>
+          <View style={{ marginLeft: 25 }}>
+            <Text style={styles.textoFinal}>{this.state.nome}</Text>
+            <Text style={styles.textoFinal}>{this.state.cursos[this.state.curso].nome}</Text>  
+            <Text style={styles.textoFinal}>{this.state.periodos[this.state.periodo].semestre}</Text>            
+          </View>
+       </View>  
+          
+          <View style={{ marginLeft: 25 }}>
+                      
+          </View>
+          <View style={{ marginLeft: 25 }}>
+                        
+          </View>
+               
       </View>
     )
   }
@@ -70,7 +131,7 @@ const styles = StyleSheet.create({
     padding: 10,    
   },
   input:{
-    height: 45,
+    height: 40,
     width: 300,
     borderWidth: 1,
     borderColor: '#222',
@@ -97,6 +158,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'arial',
     fontStyle: 'italic',  
-    padding: 10  
+    padding: 13,  
+    //marginLeft:25
+  },
+  combo:{
+    width: 300,
+    height: 40,
+    borderColor: '#222',
+    borderWidth: 1,
+    borderRadius: 5,
+    margin: 10,
+    fontSize: 17,
   },
 })
